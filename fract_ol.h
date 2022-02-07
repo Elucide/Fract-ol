@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/02/07 17:48:39 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:59:43 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,5 @@ typedef struct complex
 	float	real;
 	float	img;
 } complex;
+
+int		main(void);
