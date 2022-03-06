@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/02/17 17:49:39 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:36:27 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,36 @@ typedef struct complex
 	float	img;
 } complex;
 
-typedef struct size 
+typedef struct pos
 {
-	float	h;
-	float	w;
-} size;
+	int		x;
+	int		y;
+} pos;
 
-typedef struct mlx
+typedef struct s_img 
 {
-	void *mlx;
-	void *win;
-} mlx;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		len;
+	int		endian;
+} t_img;
+
+typedef struct s_data
+{
+	t_img	img;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	double	x_min;
+	double	x_max;
+	double	y_min;
+	double	y_max;
+	double	step;
+	int		x;
+	int		y;
+	int		h;
+	int		w;
+} t_data;
 
 #ifndef FRACT_OL_H
 # define FRACT_OL_H

@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/02/17 19:14:29 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/04 18:49:19 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,105 +16,102 @@ float	squared_modulus(complex c)
 {
 	return (sqrt((c.real * c.real) + (c.img * c.img)));
 }
-/*
-void	mandelbrot(int rate, void *mlx, void *mlx_win, int height, int width)
-{
-	int		n = 0;
-	complex	c;
-	complex	z;
-	complex	temp;
 
-	c.real = -(width / 2);
-	c.img =  -(height / 2);
-	while (c.real < (width / 2))
-	{
-		c.img = -((float)height / 2) ;
-		while (c.img < (height / 2) )
-		{
-			z.real = 0;
-			z.img = 0;
-			n = 0;
-			while (rate > n)
-			{
-				mlx_pixel_put(mlx, mlx_win, (int)c.real + width / 2, (int)c.img + height / 2, 10040319);
-				temp.real = (c.real * c.real) - (c.img * c.img) + z.real;
-				z.img = 2 * c.real * c.img + z.img;
-				z.real = temp.real;
-				if (squared_modulus(z) > 4)
-				{
-					//					printf("squared modulus of z:%f\n", squared_modulus(z));
-					mlx_pixel_put(mlx, mlx_win, (int)c.real + width / 2, (int)c.img + height / 2, 1489139);
-					break ;
-				}
-				n++;
-				//				printf("Im(z) = %f	:	Re(z) = %f\n", z.img, z.real);
-			}
-			c.img++;
-		}
-		c.real++;
-	}
-}
-*/
-void	mandelbrot(int rate, size s, mlx m, complex c)
+int	mandelbrot(int rate, complex c)
 {
 	complex	z;
 	complex	temp;
 	int		n;
-	int		done;
 
-	done = 0;
 	z.real = 0;
 	z.img = 0;
 	n = 0;
-	while (n < rate && done == 0)
+	while (n < rate)
 	{
-//		mlx_pixel_put(m.mlx, m.win, c.real + s.w / 2, c.img + s.h / 2, 10040319);
 		temp.real = (c.real * c.real) - (c.img * c.img) + z.real;
 		z.img = 2 * c.real * c.img + z.img;
 		z.real = temp.real;
 		if (squared_modulus(z) > 4)
-		{
-			mlx_pixel_put(m.mlx, m.win, c.real + s.w / 2, c.img + s.h / 2, 1489139);
-			done = 1;
-		}
+			return (0);
 		n++;
 	}
-	c.img++;
+	return (n);
 }
 
-void	screen(mlx m, size s, void(*f)(int, size, mlx, complex))
+void	img_pixel_put(t_img *img, int x, int y, int color)
+{
+	char    *pixel;
+
+    pixel = img->addr + (y * img->len + x * (img->bpp / 8));
+	*(int *)pixel = color;
+}
+
+int	mlx_push_img(t_data d)
+{
+	int	i;
+
+	i = mlx_put_image_to_window(d.mlx_ptr, d.win_ptr, d.img.img_ptr, 0, 0);
+	return (i);
+}
+
+void	screen(t_data data, int(*f)(int, complex))
 {
 	complex	c;
 
-	c.real = -(s.w / 2);
-	c.img =  -(s.h / 2);
-	while (c.real < (s.w / 2))
+	data.y_max = data.h / 2;
+	data.x_max = data.w / 2;
+	c.real = data.x_min;
+	c.img =  data.y_min;
+	while (data.x < data.x_max)
 	{
-		c.img = -(s.h / 2) ;
-		while (c.img < (s.h / 2) )
+		c.img = data.y_min ;
+		while (data.y < data.y_max)
 		{
-			f(10, s, m, c);
-			c.img++;
+			if (f(20, c))	
+				img_pixel_put(&data.img, data.x, data.y, 1489139);
+			else
+				img_pixel_put(&data.img, data.x, data.y, 10040319);
+			c.img += data.step;
+			data.y++;
 		}
-		c.real++;
+		data.x++;
+		c.real += data.step;
 	}
 }	
 
-void	pouce(size scale, size s, )
+void	mlx_img_addr(t_data d)
+{
+	char	*c;
+	c = mlx_get_data_addr(&d.img.img_ptr, &d.img.bpp, &d.img.len, &d.img.endian);
+	d.img.addr = c;
+}
 
+t_data	ft_data_init(int res, double min)
+{
+	t_data	data;
+
+	data.h = res;
+	data.w = res;
+	data.x = -data.w / 2;
+	data.y = -data.h / 2;
+	data.x_min = -min;
+	data.y_min = -min;
+	data.step = data.x_min / data.h / 2;
+	return (data);
+}
 
 int	main(void)
 {
-	mlx		m;
-	size	s;
+	t_data	data;
 
-	s.h = 720;
-	s.w = 1080;
-	m.mlx = mlx_init();
-	m.win = mlx_new_window(m.mlx, s.w, s.h, "fract-ol");
-//	mandelbrot(10, mlx, mlx_win, height, width);
-	screen(m, s, &mandelbrot);
-	mlx_loop(m.mlx);
+	data = ft_data_init(720, 2);
+	data.mlx_ptr = mlx_init();
+	data.win_ptr = mlx_new_window(data.mlx_ptr, data.w, data.h, "fract-ol");
+	mlx_img_addr(data);
+	data.img.img_ptr = mlx_new_image(data.mlx_ptr, data.w, data.h);
+	screen(data, &mandelbrot);
+	mlx_push_img(data);
+	mlx_loop(data.mlx_ptr);
 	printf("mandelbrot printed\n");
-	return (free(m.mlx), free(m.win), 0);
+	return (free(data.mlx_ptr), free(data.win_ptr), 0);
 }
