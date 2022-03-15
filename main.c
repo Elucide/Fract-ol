@@ -6,16 +6,12 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/04 18:49:19 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:20:32 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
 
-float	squared_modulus(complex c)
-{
-	return (sqrt((c.real * c.real) + (c.img * c.img)));
-}
 
 int	mandelbrot(int rate, complex c)
 {
@@ -36,22 +32,6 @@ int	mandelbrot(int rate, complex c)
 		n++;
 	}
 	return (n);
-}
-
-void	img_pixel_put(t_img *img, int x, int y, int color)
-{
-	char    *pixel;
-
-    pixel = img->addr + (y * img->len + x * (img->bpp / 8));
-	*(int *)pixel = color;
-}
-
-int	mlx_push_img(t_data d)
-{
-	int	i;
-
-	i = mlx_put_image_to_window(d.mlx_ptr, d.win_ptr, d.img.img_ptr, 0, 0);
-	return (i);
 }
 
 void	screen(t_data data, int(*f)(int, complex))
@@ -79,25 +59,41 @@ void	screen(t_data data, int(*f)(int, complex))
 	}
 }	
 
-void	mlx_img_addr(t_data d)
+t_data	*_data(void)
 {
-	char	*c;
-	c = mlx_get_data_addr(&d.img.img_ptr, &d.img.bpp, &d.img.len, &d.img.endian);
-	d.img.addr = c;
+	static	t_data	data;
+	return	(&data);
 }
 
 t_data	ft_data_init(int res, double min)
 {
-	t_data	data;
+	t_data	*data;
 
-	data.h = res;
-	data.w = res;
-	data.x = -data.w / 2;
-	data.y = -data.h / 2;
-	data.x_min = -min;
-	data.y_min = -min;
-	data.step = data.x_min / data.h / 2;
-	return (data);
+	data = _data();
+	data->h = res;
+	data->w = res;
+	data->x = -data->w / 2;
+	data->y = -data->h / 2;
+	data->x_min = -min;
+	data->y_min = -min;
+	data->step = data->x_min / data->h / 2;
+	return (*data);
+}
+
+void	print_square(t_data data)
+{
+	int x = 30;
+	int y = 30;
+	while (x < 60)
+	{
+		y = 30;
+		while (y < 60)
+		{
+			img_pixel_put(data.img.img_ptr, x, y, 560);
+			y++;
+		}
+		x++;
+	}
 }
 
 int	main(void)
@@ -107,9 +103,10 @@ int	main(void)
 	data = ft_data_init(720, 2);
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.w, data.h, "fract-ol");
-	mlx_img_addr(data);
 	data.img.img_ptr = mlx_new_image(data.mlx_ptr, data.w, data.h);
-	screen(data, &mandelbrot);
+	mlx_img_addr(data);
+//	screen(data, &mandelbrot);
+//	print_square();
 	mlx_push_img(data);
 	mlx_loop(data.mlx_ptr);
 	printf("mandelbrot printed\n");

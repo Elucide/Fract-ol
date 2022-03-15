@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/04 18:36:27 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:20:12 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef struct s_data
 # define FRACT_OL_H
 
 int		main(void);
+float	squared_modulus(complex c);
+void	img_pixel_put(t_img *img, int x, int y, int color);
+int		mlx_push_img(t_data d);
+void	mlx_img_addr(t_data d);
+int		mandelbrot(int rate, complex c);
+void	screen(t_data data, int(*f)(int, complex));
+t_data	*_data(void);
+t_data	ft_data_init(int res, double min);
+void	print_square(t_data data);
+
 
 #endif
 

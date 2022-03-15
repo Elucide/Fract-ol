@@ -1,4 +1,5 @@
-SRCS		=	main.c
+SRCS		=	main.c  \
+				utils.c
 
 NAME		=	fract_ol
 
