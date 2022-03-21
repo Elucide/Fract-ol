@@ -1,5 +1,6 @@
 SRCS		=	main.c  \
-				utils.c
+				utils.c \
+				fractals.c\
 
 NAME		=	fract_ol
 

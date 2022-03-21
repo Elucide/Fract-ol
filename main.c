@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 15:52:24 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:42:14 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,11 @@ int	rgb(int iter)
 	int		color;
 
 	r = sin(0.3 * (double)iter);
-	g = sin(0.3 * (double)iter);
-	b = sin(0.3 * (double)iter) * 127 + 128;
+	g = sin(0.3 * (double)iter) + 128;
+	b = sin(0.3 * (double)iter) * 127 +128;
 	color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) \
 			+ ((int)(255.999 * b));
 	return (color);
-}
-
-int	julia(int rate, complex c)
-{
-	int		iter;
-	complex	z;
-	complex	temp;
-
-	z.real = -0.038088;
-	z.img = 0.9754633;
-	iter = 0;
-	while (squared_modulus(z) < 4 && iter < rate)
-	{
-		temp.real = (z.real * z.real) - (z.img * z.img) + c.real;
-		z.img = 2 * z.real * z.img + c.img;
-		z.real = temp.real;
-		iter++;
-	}
-	return (rgb(iter));
-}
-
-int mandelbrot(int rate, complex c)
-{
-	int		iter;
-	complex	z;
-	complex	temp;
-
-	z.real = 0;
-	z.img = 0;
-	iter = 0;
-	while (squared_modulus(z) < 4 && iter < rate)
-	{
-		temp.real = (z.real * z.real) - (z.img * z.img) + c.real;
-		z.img = 2 * z.real * z.img + c.img;
-		z.real = temp.real;
-		iter++;
-	}
-	return (rgb(iter));
 }
 
 void	screen(int(*f)(int, complex))
@@ -75,6 +37,7 @@ void	screen(int(*f)(int, complex))
 	data->x_max = data->w / 2;
 	c.real = -2;
 	c.img =  -2;
+	data->step = 0.005;
 	while (data->x_min < data->h)
 	{
 		c.img = -2;
@@ -107,7 +70,6 @@ t_data	ft_data_init(int res)
 	data->y = -data->h / 2;
 	data->x_min = 0;
 	data->y_min = 0;
-	data->step = 0.005;
 	return (*data);
 }
 
@@ -140,7 +102,7 @@ int	main(void)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, data->w, data->h);
 	mlx_img_addr();
-	screen(&julia);
+	screen(&mandelbrot);
 	mlx_push_img();
 	mlx_loop(data->mlx_ptr);
 	printf("mandelbrot printed\n");
