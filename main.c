@@ -6,39 +6,11 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 15:33:37 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:52:24 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
-
-/*
-int	mandelbrot(int rate, complex c)
-{
-	complex	z;
-	complex	temp;
-	int		n;
-
-	z.real = 0;
-	z.img = 0;
-	n = 0;
-	while (n < rate)
-	{
-		temp.real = (c.real * c.real) - (c.img * c.img) + z.real;
-		z.img = 2 * c.real * c.img + z.img;
-		z.real = temp.real;
-		if (squared_modulus(z) > 4)
-		{
-			break ;
-		}
-		dprintf(1, "not breaked\n");
-		n++;
-	}
-//	dprintf(1, "%f\n", squared_modulus(z));
-	//	dprintf(1, "n : %d\n", n);
-	return (n * 100);
-}
-*/
 
 int	rgb(int iter)
 {
@@ -55,7 +27,26 @@ int	rgb(int iter)
 	return (color);
 }
 
-int	mandelbrot(int rate, complex c)
+int	julia(int rate, complex c)
+{
+	int		iter;
+	complex	z;
+	complex	temp;
+
+	z.real = -0.038088;
+	z.img = 0.9754633;
+	iter = 0;
+	while (squared_modulus(z) < 4 && iter < rate)
+	{
+		temp.real = (z.real * z.real) - (z.img * z.img) + c.real;
+		z.img = 2 * z.real * z.img + c.img;
+		z.real = temp.real;
+		iter++;
+	}
+	return (rgb(iter));
+}
+
+int mandelbrot(int rate, complex c)
 {
 	int		iter;
 	complex	z;
@@ -80,28 +71,23 @@ void	screen(int(*f)(int, complex))
 	t_data *data;
 
 	data = _data();
-	data->x_min = 0;
-	data->y_min = 0;
 	data->y_max = data->h / 2;
 	data->x_max = data->w / 2;
 	c.real = -2;
 	c.img =  -2;
-	dprintf(1, "step = %f\n", data->step);
-	dprintf(1, "x_max = %f      y_max = %f\n", c.img, c.real);
 	while (data->x_min < data->h)
 	{
 		c.img = -2;
 		data->y_min = 0;
 		while (data->y_min < data->w)
 		{
-			img_pixel_put(data->x_min, data->y_min, f(20, c));
+			img_pixel_put(data->x_min, data->y_min, f(50, c));
 			c.img += data->step;
 			data->y_min++;
 		}
 		data->x_min++;
 		c.real += data->step;
 	}
-	dprintf(1, "x_max = %f      y_max = %f\n", c.img, c.real);
 }	
 
 t_data	*_data(void)
@@ -110,7 +96,7 @@ t_data	*_data(void)
 	return	(&data);
 }
 
-t_data	ft_data_init(int res, double min)
+t_data	ft_data_init(int res)
 {
 	t_data	*data;
 
@@ -119,8 +105,8 @@ t_data	ft_data_init(int res, double min)
 	data->w = res;
 	data->x = -data->w / 2;
 	data->y = -data->h / 2;
-	data->x_min = -min;
-	data->y_min = -min;
+	data->x_min = 0;
+	data->y_min = 0;
 	data->step = 0.005;
 	return (*data);
 }
@@ -149,13 +135,12 @@ int	main(void)
 	t_data	*data;
 
 	data = _data();
-	ft_data_init(720, 2);
+	ft_data_init(720);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, data->w, data->h);
 	mlx_img_addr();
-	screen(&mandelbrot);
-	//	print_square();
+	screen(&julia);
 	mlx_push_img();
 	mlx_loop(data->mlx_ptr);
 	printf("mandelbrot printed\n");

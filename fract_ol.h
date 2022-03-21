@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/15 17:20:12 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/21 15:42:54 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	mlx_img_addr(void);
 int		mandelbrot(int rate, complex c);
 void	screen(int (*f)(int, complex));
 t_data	*_data(void);
-t_data	ft_data_init(int res, double min);
+t_data	ft_data_init(int res);
 void	print_square(void);
 
 
