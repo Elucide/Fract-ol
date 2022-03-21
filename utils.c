@@ -18,27 +18,46 @@ float	squared_modulus(complex c)
 	return (sqrt((c.real * c.real) + (c.img * c.img)));
 }
 
+//  void    my_mlx_pixel_put(t_all *all, int x, int y, int color)
+// {
+//     char    *dst;
 
-void	img_pixel_put(t_img *img, int x, int y, int color)
+//     if (((0 < x) && (x < 1920)) && ((0 < y) && (y < 1080)))
+//     {
+//         dst = all->image_data.addr + (y * all->image_data.line_length
+//                 + x * (all->image_data.bits_per_pixel / 8));
+//         *(unsigned int *)dst = color;
+//     }
+// }
+
+void	img_pixel_put(int x, int y, int color)
 {
 	char    *pixel;
+	t_data	*data;
 
-    pixel = img->addr + (y * img->len + x * (img->bpp / 8));
-	*(int *)pixel = color;
+    data = _data();
+	if (x > 0 && x < data->h && y > 0 && y < data->w)
+	{
+		pixel = data->img.addr + (y * data->img.len + x * (data->img.bpp / 8));
+		*(unsigned int *)pixel = color;
+	}
 }
 
-int	mlx_push_img(t_data d)
+int	mlx_push_img(void)
 {
 	int	i;
+	t_data *d;
 
-	i = mlx_put_image_to_window(d.mlx_ptr, d.win_ptr, d.img.img_ptr, 0, 0);
+	d = _data();
+	i = mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.img_ptr, 0, 0);
 	return (i);
 }
 
-void	mlx_img_addr(t_data d)
+void	mlx_img_addr(void)
 {
-	char	*c;
-	c = mlx_get_data_addr(&d.img.img_ptr, &d.img.bpp, &d.img.len, &d.img.endian);
-	d.img.addr = c;
+	t_data	*d;
+
+	d = _data();
+	d->img.addr = mlx_get_data_addr(d->img.img_ptr, &d->img.bpp, &d->img.len, &d->img.endian);
 }
 

@@ -59,14 +59,14 @@ typedef struct s_data
 
 int		main(void);
 float	squared_modulus(complex c);
-void	img_pixel_put(t_img *img, int x, int y, int color);
-int		mlx_push_img(t_data d);
-void	mlx_img_addr(t_data d);
+void	img_pixel_put(int x, int y, int color);
+int	mlx_push_img(void);
+void	mlx_img_addr(void);
 int		mandelbrot(int rate, complex c);
-void	screen(t_data data, int(*f)(int, complex));
+void	screen(int (*f)(int, complex));
 t_data	*_data(void);
 t_data	ft_data_init(int res, double min);
-void	print_square(t_data data);
+void	print_square(void);
 
 
 #endif
