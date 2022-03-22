@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/22 11:48:57 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/22 14:56:44 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_data
 int		main(void);
 float	squared_modulus(complex c);
 void	img_pixel_put(int x, int y, int color);
-int	mlx_push_img(void);
+int		mlx_push_img(void);
 void	mlx_img_addr(void);
 int		mandelbrot(int rate, complex c);
 int		julia(int rate, complex c);

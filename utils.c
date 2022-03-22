@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:28:16 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/22 11:37:29 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:41:14 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	rgb(int iter)
 	int		color;
 
 	r = sin(0.3 * (double)iter);
-	g = sin(0.3 * (double)iter) + 128;
-	b = sin(0.3 * (double)iter) * 127 +128;
+	g = sin(0.3 * (double)iter)/* + 128*/;
+	b = sin(0.3 * (double)iter) * 127;
 	color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) \
 			+ ((int)(255.999 * b));
 	return (color);
