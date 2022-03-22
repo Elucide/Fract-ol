@@ -6,12 +6,26 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:28:16 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 16:22:42 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:37:29 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
 
+int	rgb(int iter)
+{
+	double	r;
+	double	g;
+	double	b;
+	int		color;
+
+	r = sin(0.3 * (double)iter);
+	g = sin(0.3 * (double)iter) + 128;
+	b = sin(0.3 * (double)iter) * 127 +128;
+	color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) \
+			+ ((int)(255.999 * b));
+	return (color);
+}
 
 float	squared_modulus(complex c)
 {

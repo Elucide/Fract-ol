@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 16:23:50 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/22 11:48:57 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ typedef struct s_data
 	double	x_max;
 	double	y_min;
 	double	y_max;
+	double	len;
 	double	step;
+	complex	origin;
 	int		x;
 	int		y;
 	int		h;
@@ -68,7 +70,6 @@ int		rgb(int iter);
 void	screen(int (*f)(int, complex));
 t_data	*_data(void);
 t_data	ft_data_init(int res);
-void	print_square(void);
 
 
 #endif

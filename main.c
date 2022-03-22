@@ -6,26 +6,11 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 16:42:14 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:19:07 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
-
-int	rgb(int iter)
-{
-	double	r;
-	double	g;
-	double	b;
-	int		color;
-
-	r = sin(0.3 * (double)iter);
-	g = sin(0.3 * (double)iter) + 128;
-	b = sin(0.3 * (double)iter) * 127 +128;
-	color = ((int)(255.999 * r) << 16) + ((int)(255.999 * g) << 8) \
-			+ ((int)(255.999 * b));
-	return (color);
-}
 
 void	screen(int(*f)(int, complex))
 {
@@ -35,22 +20,23 @@ void	screen(int(*f)(int, complex))
 	data = _data();
 	data->y_max = data->h / 2;
 	data->x_max = data->w / 2;
-	c.real = -2;
-	c.img =  -2;
-	data->step = 0.005;
-	while (data->x_min < data->h)
+	c.real = data->x_min;
+	c.img =  data->y_min;
+	dprintf(1, "x_min = %f, y_min = %f\n", c.real, c.img);
+	while (data->x < data->h)
 	{
-		c.img = -2;
-		data->y_min = 0;
-		while (data->y_min < data->w)
+		c.img = data->y_min;
+		data->y = 0;
+		while (data->y < data->w)
 		{
-			img_pixel_put(data->x_min, data->y_min, f(50, c));
+			img_pixel_put(data->x, data->y, f(50, c));
 			c.img += data->step;
-			data->y_min++;
+			data->y++;
 		}
-		data->x_min++;
+		data->x++;
 		c.real += data->step;
 	}
+	dprintf(1, "x_min = %f, y_min = %f\n", c.real, c.img);
 }	
 
 t_data	*_data(void)
@@ -66,30 +52,15 @@ t_data	ft_data_init(int res)
 	data = _data();
 	data->h = res;
 	data->w = res;
-	data->x = -data->w / 2;
-	data->y = -data->h / 2;
-	data->x_min = 0;
-	data->y_min = 0;
+	data->x = 0;
+	data->y = 0;
+	data->len = 4;
+	data->origin.real = 0;
+	data->origin.img = 0;
+	data->x_min = data->origin.real - data->len / 2;
+	data->y_min = data->origin.img - data->len / 2;
+	data->step = data->len / res;
 	return (*data);
-}
-
-void	print_square(void)
-{
-	t_data	*data;
-
-	data = _data();
-	int x = 30;
-	int y = 30;
-	while (x < 500)
-	{
-		y = 30;
-		while (y < 500)
-		{
-			img_pixel_put(x, y, 56000);
-			y++;
-		}
-		x++;
-	}
 }
 
 int	main(void)
