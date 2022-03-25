@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/22 14:56:44 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:41:12 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	double	step;
 	complex	origin;
 	int		x;
+	int		res;
 	int		y;
 	int		h;
 	int		w;
@@ -70,6 +71,7 @@ int		rgb(int iter);
 void	screen(int (*f)(int, complex));
 t_data	*_data(void);
 t_data	ft_data_init(int res);
+void	ft_free(void);
 
 
 #endif

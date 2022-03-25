@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fratals.c                                          :+:      :+:    :+:   */
+/*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:20:37 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/21 16:21:49 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:49:25 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ int mandelbrot(int rate, complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (rgb(iter));
+	return (rgb(iter) - sin(z.real * z.img));
 }
+
+//return (rgb(iter) + (z.real / sin(z.real) + fabs(z.img)));
+//return (rgb(iter) - log(sin(z.real * z.img)));
+//return (rgb(iter) - sin(z.real * z.img));

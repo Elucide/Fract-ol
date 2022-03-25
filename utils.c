@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:28:16 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/22 16:41:14 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:55:23 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,15 @@ void	mlx_img_addr(void)
 
 	d = _data();
 	d->img.addr = mlx_get_data_addr(d->img.img_ptr, &d->img.bpp, &d->img.len, &d->img.endian);
+}
+
+void	ft_free(void)
+{
+	t_data *data;
+
+	data = _data();
+	free(data->mlx_ptr);
+	free(data->win_ptr);
+	free(data->img.img_ptr);
 }
 
