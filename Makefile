@@ -1,6 +1,10 @@
 SRCS		=	main.c  \
 				utils.c \
 				fractals.c\
+				comp.c\
+				rendering.c\
+				hooks.c\
+				colors.c\
 
 NAME		=	fract_ol
 
