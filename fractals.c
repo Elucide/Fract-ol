@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:20:37 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/01 15:02:02 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:40:42 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	julia(int rate, complex c)
 	int		iter;
 	complex	z;
 	complex	temp;
+	t_data	*data;
 
+	data = _data();
 	z.real = -0.038088;
 	z.img = 0.9754633;
 	iter = 0;
@@ -28,7 +30,7 @@ int	julia(int rate, complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (rgb(iter) + (z.real / sin(z.real) + fabs(z.img)));
+	return (rgb(iter, data->mode) + (z.real / sin(z.real) + fabs(z.img)));
 }
 
 int	mandelbrot(int rate, complex c)
@@ -36,7 +38,9 @@ int	mandelbrot(int rate, complex c)
 	int		iter;
 	complex	z;
 	complex	temp;
+	t_data	*data;
 
+	data = _data();
 	z.real = 0;
 	z.img = 0;
 	iter = 0;
@@ -47,7 +51,7 @@ int	mandelbrot(int rate, complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (rgb(iter) + (z.real / sin(z.real) + fabs(z.img)));
+	return (rgb(iter, data->mode) + (z.real / sin(z.real) + fabs(z.img)));
 }
 
 int	burning_ship(int rate, complex c)
@@ -55,7 +59,9 @@ int	burning_ship(int rate, complex c)
 	int		iter;
 	complex	z;
 	complex	temp;
+	t_data	*data;
 
+	data = _data();
 	z.real = 0;
 	z.img = 0;
 	iter = 0;
@@ -67,7 +73,7 @@ int	burning_ship(int rate, complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (rgb(iter) + (z.real / sin(z.real) + fabs(z.img)));
+	return (rgb(iter, data->mode) + (z.real / sin(z.real) + fabs(z.img)));
 }
 
 //return (rgb(iter) + log(z.img));

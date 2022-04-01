@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/28 20:11:00 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:37:57 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data
 	int			res;
 	int			y;
 	int			h;
+	int			mode;
 	int			w;
 	int			exit;
 } t_data;
@@ -71,7 +72,7 @@ void	mlx_img_addr(void);
 int		mandelbrot(int rate, complex c);
 int		julia(int rate, complex c);
 int		burning_ship(int rate, complex c);
-int		rgb(int iter);
+int		rgb(int iter,int mode);
 int		render(float len, float o_x, float o_y);
 int		ft_strcheck(char *s1, char *s2);
 int		mouse_hook(int mousecode, void *param);
