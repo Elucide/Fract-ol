@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:28:16 by yschecro          #+#    #+#             */
-/*   Updated: 2022/03/28 20:00:12 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:17:56 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_free(void)
 	t_data	*data;
 
 	data = _data();
-	free(data->mlx_ptr);
-	free(data->win_ptr);
-	free(data->img.img_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free(data->img.addr);
 }

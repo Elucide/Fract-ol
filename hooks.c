@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:25:21 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/01 16:43:42 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:20:57 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int	key_hook(int keycode, void *param)
 		render(d->len, d->origin.real, d->origin.img);
 	}
 	else if (keycode == 65307)
-		d->exit = 1;
+		ft_free();
 	return (dprintf(1, "key = %d   param == %p\n", keycode, param));
 }
