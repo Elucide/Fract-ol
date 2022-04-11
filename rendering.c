@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:27:07 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/01 16:36:40 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:27:36 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	screen(int (*f)(int, complex))
 		data->y = 0;
 		while (data->y < data->w)
 		{
-			img_pixel_put(data->x, data->y, f(50, c));
+			img_pixel_put(data->x, data->y, f(data->rate, c));
 			c.img += data->step;
 			data->y++;
 		}

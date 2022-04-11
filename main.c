@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/01 16:54:19 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/04/11 14:42:56 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ t_data	ft_data_init(int res)
 	data = _data();
 	data->res = res;
 	data->exit = 0;
+	data->rate = 80;
 	data->h = res;
 	data->mode = 0;
+	data->maths = 0;
 	data->w = res;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
