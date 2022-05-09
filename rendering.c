@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:27:07 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/01 17:27:36 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:53:06 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	render(float len, float o_x, float o_y)
 	if (data->img.img_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, data->w, data->h);
+	if (!data->img.img_ptr)
+		return (-1);
 	mlx_img_addr();
 	data->len = len;
 	data->origin.real = o_x;

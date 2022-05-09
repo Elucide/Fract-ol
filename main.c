@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/11 14:42:56 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:57:03 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_data	ft_data_init(int res)
 	data->maths = 0;
 	data->w = res;
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
+	if (data->mlx_ptr)
+		data->win_ptr = mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
 	return (*data);
 }
 
@@ -44,18 +45,21 @@ int	main(int ac, char **av)
 		return (write(1, "not enough arg\0", 16));
 	data = _data();
 	ft_data_init(720);
-	if (ft_strcheck(av[1], "mandelbrot"))
-		data->f = &mandelbrot;
-	else if (ft_strcheck(av[1], "julia"))
-		data->f = &julia;
-	else if (ft_strcheck(av[1], "burning_ship"))
-		data->f = &burning_ship;
-	else
-		return (write(1, \
-			"\n\nwrong arg\nTry with mandelbrot, julia or burning_ship\n", 55));
-	render(4, 0, 0);
-	mlx_key_hook (data->win_ptr, key_hook, data->mlx_ptr);
-	mlx_mouse_hook(data->win_ptr, mouse_hook, data->mlx_ptr);
+	if (data->win_ptr && data->mlx_ptr)
+	{
+		if (ft_strcheck(av[1], "mandelbrot"))
+			data->f = &mandelbrot;
+		else if (ft_strcheck(av[1], "julia"))
+			data->f = &julia;
+		else if (ft_strcheck(av[1], "burning_ship"))
+			data->f = &burning_ship;
+		else
+			return (write(1, \
+						"\n\nwrong arg\nTry with mandelbrot, julia or burning_ship\n", 55));
+		render(4, 0, 0);
+		mlx_key_hook (data->win_ptr, key_hook, data->mlx_ptr);
+		mlx_mouse_hook(data->win_ptr, mouse_hook, data->mlx_ptr);
+	}
 	if (data->exit)
 		return (ft_free(), 0);
 	mlx_loop(data->mlx_ptr);

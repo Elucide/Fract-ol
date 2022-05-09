@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/11 14:29:25 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:19:40 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		burning_ship(int rate, complex c);
 int		rgb(int iter,int mode, int maths);
 int		render(float len, float o_x, float o_y);
 int		ft_strcheck(char *s1, char *s2);
-int		mouse_hook(int mousecode, void *param);
+int		mouse_hook(int mousecode, int x, int y, void *param);
 int		key_hook(int keycode, void *param);
 void	screen(int (*f)(int, complex));
 t_data	*_data(void);
