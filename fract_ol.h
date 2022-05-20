@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/09 18:19:40 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/20 19:05:28 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 #define _C_I 1	
-
+#define ERROR "\n\nwrong arg\nTry with mandelbrot, julia or burning_ship\n"
 typedef struct complex
 {
 	double	real;
@@ -51,6 +51,7 @@ typedef struct s_data
 	double		len;
 	double		step;
 	complex		origin;
+	complex		j;
 	int			(*f)(int, complex);
 	int			x;
 	int			res;
@@ -66,25 +67,26 @@ typedef struct s_data
 #ifndef FRACT_OL_H
 # define FRACT_OL_H
 
-int		main(int ac, char **av);
-float	squared_modulus(complex c);
-void	img_pixel_put(int x, int y, int color);
-int		mlx_push_img(void);
-void	mlx_img_addr(void);
-int		mandelbrot(int rate, complex c);
-int		julia(int rate, complex c);
-int		burning_ship(int rate, complex c);
-int		rgb(int iter,int mode, int maths);
-int		render(float len, float o_x, float o_y);
-int		ft_strcheck(char *s1, char *s2);
-int		mouse_hook(int mousecode, int x, int y, void *param);
-int		key_hook(int keycode, void *param);
-void	screen(int (*f)(int, complex));
-t_data	*_data(void);
-t_data	ft_data_init(int res);
-int		ft_maths(int iter, complex z);
-void	ft_free(void);
-char	*ft_strcpy(char *s1, char *s2);
+int			main(int ac, char **av);
+float		squared_modulus(complex c);
+void		img_pixel_put(int x, int y, int color);
+int			mlx_push_img(void);
+void		mlx_img_addr(void);
+int				mandelbrot(int rate, complex c);
+int			julia(int rate, complex c);
+int			burning_ship(int rate, complex c);
+int			rgb(int iter,int mode, int maths);
+int			render(float len, float o_x, float o_y);
+int			ft_strcheck(char *s1, char *s2);
+int			mouse_hook(int mousecode, int x, int y, void *param);
+int			close_win(int param);
+int			key_hook(int keycode, void *param);
+void		screen(int (*f)(int, complex));
+t_data		*_data(void);
+t_data		ft_data_init(int res);
+int			ft_maths(int iter, complex z);
+void		ft_free(void);
+char		*ft_strcpy(char *s1, char *s2);
 
 
 #endif

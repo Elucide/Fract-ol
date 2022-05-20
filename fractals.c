@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:20:37 by yschecro          #+#    #+#             */
-/*   Updated: 2022/04/11 14:30:33 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/20 18:40:15 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	julia(int rate, complex c)
 	t_data	*data;
 
 	data = _data();
-	z.real = -0.038088;
-	z.img = 0.9754633;
+	z.real = data->j.real;
+	z.img = data->j.img;
 	iter = 0;
 	while (squared_modulus(z) < 4 && iter < rate)
 	{
@@ -86,15 +86,15 @@ int	ft_maths(int iter, complex z)
 	m = d->maths;
 	if (d->maths == 0)
 		return (rgb(iter, d->mode, m));
-	if (d->maths == 1)
+	else if (d->maths == 1)
 		return (rgb(iter, d->mode, m) + (z.real / sin(z.real) + fabs(z.img)));
-	if (d->maths == 2)
+	else if (d->maths == 2)
 		return (rgb(iter, d->mode, m) + log(z.img));
-	if (d->maths == 3)
+	else if (d->maths == 3)
 		return (rgb(iter, d->mode, m) - log(sin(z.real * z.img)));
-	if (d->maths == 4)
+	else if (d->maths == 4)
 		return (rgb(iter, d->mode + exp(z.real * z.img), m));
-	if (d->maths == 5)
+	else
 	{
 		d->maths = 0;
 		return (rgb(iter, d->mode, m));
