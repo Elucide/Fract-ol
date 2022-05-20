@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/20 19:16:55 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/20 20:49:22 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_data	ft_data_init(int res)
 	data->res = res;
 	data->exit = 0;
 	data->rate = 90;
+	data->can_read = 1;
 	data->h = res;
 	data->mode = 0;
 	data->maths = 0;
@@ -81,13 +82,15 @@ int	main(int ac, char **av)
 	data->f = fractal(ac, av);
 	if (!data->f)
 		return (write(1, ERROR, 55));
-	ft_data_init(720);
+	ft_data_init(1080);
 	if (data->win_ptr && data->mlx_ptr)
 	{
 		render(4, 0, 0);
 		mlx_key_hook (data->win_ptr, key_hook, data->mlx_ptr);
 		mlx_mouse_hook(data->win_ptr, mouse_hook, data->mlx_ptr);
 		mlx_hook(data->win_ptr, 17, 0, close_win, 0);
+		mlx_hook(data->win_ptr, 6, 1L<<8, julia_move, data->mlx_ptr);
+		dprintf(1, "can_read: %d\n", data->can_read);
 		mlx_loop(data->mlx_ptr);
 	}
 	else

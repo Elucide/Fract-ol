@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/20 19:05:28 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/20 20:53:30 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data
 	complex		origin;
 	complex		j;
 	int			(*f)(int, complex);
+	int			can_read;
 	int			x;
 	int			res;
 	int			y;
@@ -72,7 +73,7 @@ float		squared_modulus(complex c);
 void		img_pixel_put(int x, int y, int color);
 int			mlx_push_img(void);
 void		mlx_img_addr(void);
-int				mandelbrot(int rate, complex c);
+int			mandelbrot(int rate, complex c);
 int			julia(int rate, complex c);
 int			burning_ship(int rate, complex c);
 int			rgb(int iter,int mode, int maths);
@@ -87,6 +88,7 @@ t_data		ft_data_init(int res);
 int			ft_maths(int iter, complex z);
 void		ft_free(void);
 char		*ft_strcpy(char *s1, char *s2);
+int 		julia_move(int x, int y, void *param);
 
 
 #endif
