@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:24:44 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/09 17:44:32 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/21 08:49:00 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	rgb(int iter, int mode, int maths)
 	r = sin(0.3 * (double)iter);
 	g = sin(0.3 * (double)iter);
 	b = sin(0.3 * (double)iter);
-	if (mode == 0)
+	if (mode == 0 || mode == 3)
 	{
+		mode *= 0;
 		b *= 127;
 		g += rand() * 500 * maths;
 	}

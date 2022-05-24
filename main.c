@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/20 20:49:22 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:14:44 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_data	ft_data_init(int res)
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr)
 		data->win_ptr = \
-						mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
+			mlx_new_window(data->mlx_ptr, data->w, data->h, "fract-ol");
 	return (*data);
 }
 
@@ -64,11 +64,11 @@ static void	*fractal(int ac, char **av)
 	if (ac == 2)
 	{
 		if (ft_strcheck(av[1], "mandelbrot"))
-			return(&mandelbrot);
+			return (&mandelbrot);
 		else if (ft_strcheck(av[1], "julia"))
-			return(&julia);
+			return (&julia);
 		else if (ft_strcheck(av[1], "burning_ship"))
-			return(&burning_ship);
+			return (&burning_ship);
 	}
 	return (NULL);
 }
@@ -77,20 +77,18 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 
-//	dprintf(1, "%f\n", ft_atof(av[2]));
 	data = _data();
 	data->f = fractal(ac, av);
 	if (!data->f)
 		return (write(1, ERROR, 55));
-	ft_data_init(1080);
+	ft_data_init(720);
 	if (data->win_ptr && data->mlx_ptr)
 	{
 		render(4, 0, 0);
 		mlx_key_hook (data->win_ptr, key_hook, data->mlx_ptr);
 		mlx_mouse_hook(data->win_ptr, mouse_hook, data->mlx_ptr);
 		mlx_hook(data->win_ptr, 17, 0, close_win, 0);
-		mlx_hook(data->win_ptr, 6, 1L<<8, julia_move, data->mlx_ptr);
-		dprintf(1, "can_read: %d\n", data->can_read);
+		mlx_hook(data->win_ptr, 6, 1L << 8, julia_move, data->mlx_ptr);
 		mlx_loop(data->mlx_ptr);
 	}
 	else

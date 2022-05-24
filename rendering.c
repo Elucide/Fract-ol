@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:27:07 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/20 20:48:15 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:46:01 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	screen(int (*f)(int, complex))
 	}
 }
 
-int	render(float len, float o_x, float o_y)
+int	render(double len, double o_x, double o_y)
 {
 	t_data	*data;
 
@@ -56,5 +56,6 @@ int	render(float len, float o_x, float o_y)
 	data->step = data->len / data->res;
 	screen(data->f);
 	mlx_push_img();
+	data->can_read = 1;
 	return (1);
 }
