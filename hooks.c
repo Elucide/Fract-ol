@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:25:21 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/25 18:49:06 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:02:44 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	julia_move(int x, int y, void *param)
 	return (1);
 }
 
-int	mouse_hook(int mousecode, int x, int y, void *param)
+int	mouse_hook(int mousecode, void *param)
 {
 	t_data	*d;
 
@@ -43,7 +43,7 @@ int	mouse_hook(int mousecode, int x, int y, void *param)
 		return (0);
 	if (mousecode == 4)
 		render(d->len * 0.75, \
-			d->origin.real + mouse(x) / 1.5, d->origin.img + mouse(y) / 1.5);
+			d->origin.real, d->origin.img);
 	else if (mousecode == 5)
 		render(d->len * 1.25, d->origin.real, d->origin.img);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/25 18:56:19 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:03:02 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			mandelbrot(int rate, t_complex c);
 int			julia(int rate, t_complex c);
 int			render(double len, double o_x, double o_y);
 int			ft_strcheck(char *s1, char *s2);
-int			mouse_hook(int mousecode, int x, int y, void *param);
+int			mouse_hook(int mousecode, void *param);
 int			close_win(int param);
 int			key_hook(int keycode, void *param);
 void		screen(int (*f)(int, t_complex));
