@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:52:33 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/25 18:44:39 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:01:12 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "fract_ol_bonus.h"
 
 t_data	*_data(void)
 {
@@ -67,6 +67,8 @@ static void	*fractal(int ac, char **av)
 			return (&mandelbrot);
 		else if (ft_strcheck(av[1], "julia"))
 			return (&julia);
+		else if (ft_strcheck(av[1], "burning_ship"))
+			return (&burning_ship);
 	}
 	return (NULL);
 }

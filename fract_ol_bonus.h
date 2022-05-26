@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract_ol.h                                         :+:      :+:    :+:   */
+/*   fract_ol_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/25 18:56:19 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:02:23 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACT_OL_H
-# define FRACT_OL_H
+#ifndef FRACT_OL_BONUS_H
+# define FRACT_OL_BONUS_H
 
 # include "mlx_linux/mlx.h"
 # include <stdlib.h>
@@ -69,6 +69,8 @@ int			mlx_push_img(void);
 void		mlx_img_addr(void);
 int			mandelbrot(int rate, t_complex c);
 int			julia(int rate, t_complex c);
+int			burning_ship(int rate, t_complex c);
+int			rgb(int iter, int mode, int maths);
 int			render(double len, double o_x, double o_y);
 int			ft_strcheck(char *s1, char *s2);
 int			mouse_hook(int mousecode, int x, int y, void *param);
@@ -77,6 +79,7 @@ int			key_hook(int keycode, void *param);
 void		screen(int (*f)(int, t_complex));
 t_data		*_data(void);
 t_data		ft_data_init(int res);
+int			ft_maths(int iter, t_complex z);
 void		ft_free(void);
 char		*ft_strcpy(char *s1, char *s2);
 int			julia_move(int x, int y, void *param);
