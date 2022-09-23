@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:25:21 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/26 16:02:44 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/09/23 04:57:11 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,32 @@ int	julia_move(int x, int y, void *param)
 	return (1);
 }
 
-int	mouse_hook(int mousecode, void *param)
+int	mouse_hook(int mousecode, int x, int y, void *param)
 {
 	t_data	*d;
 
 	d = _data();
-	if (!param || !d->can_read)
+	if (!param)
 		return (0);
 	if (mousecode == 4)
 		render(d->len * 0.75, \
-			d->origin.real, d->origin.img);
+			d->origin.real + mouse(x) / 1.5, d->origin.img + mouse(y) / 1.5);
 	else if (mousecode == 5)
 		render(d->len * 1.25, d->origin.real, d->origin.img);
 	return (0);
+}
+
+static void	color_mode(void)
+{
+	t_data	*d;
+
+	d = _data();
+	if (d->mode == 0)
+		d->mode = 1;
+	else if (d->mode == 1)
+		d->mode = 2;
+	else if (d->mode == 2)
+		d->mode = 0;
 }
 
 int	key_hook(int keycode, void *param)
@@ -64,5 +77,15 @@ int	key_hook(int keycode, void *param)
 		render(d->len, d->origin.real + d->len / 15, d->origin.img);
 	else if (keycode == 65307)
 		close_win(0);
+	else if (keycode == 65506)
+	{
+		color_mode();
+		render(d->len, d->origin.real, d->origin.img);
+	}
+	else if (keycode == 65293)
+	{
+		d->maths++;
+		render(d->len, d->origin.real, d->origin.img);
+	}
 	return ((void) param, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 17:46:34 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/26 16:03:02 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/09/23 04:57:01 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ int			mlx_push_img(void);
 void		mlx_img_addr(void);
 int			mandelbrot(int rate, t_complex c);
 int			julia(int rate, t_complex c);
+int			burning_ship(int rate, t_complex c);
+int			rgb(int iter, int mode, int maths);
 int			render(double len, double o_x, double o_y);
 int			ft_strcheck(char *s1, char *s2);
-int			mouse_hook(int mousecode, void *param);
+int			mouse_hook(int mousecode, int x, int y, void *param);
 int			close_win(int param);
 int			key_hook(int keycode, void *param);
 void		screen(int (*f)(int, t_complex));
 t_data		*_data(void);
 t_data		ft_data_init(int res);
+int			ft_maths(int iter, t_complex z);
 void		ft_free(void);
 char		*ft_strcpy(char *s1, char *s2);
 int			julia_move(int x, int y, void *param);

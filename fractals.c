@@ -6,7 +6,7 @@
 /*   By: yschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 16:20:37 by yschecro          #+#    #+#             */
-/*   Updated: 2022/05/25 18:58:39 by yschecro         ###   ########.fr       */
+/*   Updated: 2022/09/23 04:57:06 by yschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	julia(int rate, t_complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (iter * 200);
+	return (ft_maths(iter, z));
 }
 
 int	mandelbrot(int rate, t_complex c)
@@ -51,5 +51,57 @@ int	mandelbrot(int rate, t_complex c)
 		z.real = temp.real;
 		iter++;
 	}
-	return (iter * 200);
+	return (ft_maths(iter, z));
 }
+//	return (rgb(iter, data->mode) + (z.real / sin(z.real) + fabs(z.img)));
+
+int	burning_ship(int rate, t_complex c)
+{
+	int			iter;
+	t_complex	z;
+	t_complex	temp;
+	t_data		*data;
+
+	data = _data();
+	z.real = 0;
+	z.img = 0;
+	iter = 0;
+	while (squared_modulus(z) < 4 && iter < rate)
+	{
+		temp.real = (fabs(z.real) * fabs(z.real)) - (fabs(z.img) \
+			* fabs(z.img)) + c.real;
+		z.img = 2 * fabs(z.real) * fabs(z.img) + c.img;
+		z.real = temp.real;
+		iter++;
+	}
+	return (ft_maths(iter, z));
+}
+
+int	ft_maths(int iter, t_complex z)
+{
+	t_data	*d;
+	int		m;
+
+	d = _data();
+	m = d->maths;
+	if (d->maths == 0 || d->maths == 5)
+	{
+		d->maths *= 0;
+		return (rgb(iter, d->mode, m));
+	}
+	else if (d->maths == 1)
+		return (rgb(iter, d->mode, m) + (z.real / sin(z.real) + fabs(z.img)));
+	else if (d->maths == 2)
+		return (rgb(iter, d->mode, m) + log(z.img));
+	else if (d->maths == 3)
+		return (rgb(iter, d->mode, m) - log(sin(z.real * z.img)));
+	else if (d->maths == 4)
+		return (rgb(iter, d->mode + exp(z.real * z.img), m));
+	return (0);
+}
+
+//return (rgb(iter, data->mode) + (z.real / sin(z.real) + fabs(z.img)));
+//return (rgb(iter) + (z.real / sin(z.real) + fabs(z.img)));
+//return (rgb(iter) - log(sin(z.real * z.img)));
+//return (rgb(iter) - sin(z.real * z.img));
+//return (rgb(iter) - sin(z.real * z.img));
